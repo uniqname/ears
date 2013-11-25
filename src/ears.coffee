@@ -13,7 +13,7 @@
     earsObj.on 'eventName', (e) ->
         //Do stuff
 
-    # ears has an alternative syntax to changes the focus from triggering object managed events to listening object managed events
+    # ears has an alternative syntax which changes the focus from events managed by the triggering object being managed by the listening object.
     earsObj.listenTo 'eventName', objToListenTo, (e) ->
         //Do stuff
 
