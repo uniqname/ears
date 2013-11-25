@@ -18,6 +18,19 @@ module.exports = (grunt) ->
 
                         return "#{dest}#{filename}.js"
                 }]
+                
+        # https:#github.com/gruntjs/grunt-contrib-uglify
+        uglify:
+            options:
+                compress: true
+                preserveComments:'some' # preserve the blocks of comments that start with a /*!
+                sourceMap: "dist/<%= pkg.name %>.min.js.map"
+                sourceMapIn: 'dist/<%= pkg.name %>.js.map'
+                sourceMapRoot: "dist/"
+
+            dist:
+                src:['dist/<%= pkg.name %>.js']
+                dest:'dist/<%= pkg.name %>.min.js'
 
         # https:#npmjs.org/package/grunt-include-replace
         includereplace:
@@ -37,17 +50,6 @@ module.exports = (grunt) ->
 
                 # Destinaion directory to copy files to
                 dest: 'dist/'
-
-        # https:#github.com/gruntjs/grunt-contrib-uglify
-        uglify:
-            options:
-                compress: true
-                preserveComments:'some' # preserve the blocks of comments that start with a /*!
-
-            dist:
-                src:['dist/<%= pkg.name %>.js']
-                dest:'dist/<%= pkg.name %>.min.js'
-
 
     grunt.loadNpmTasks 'grunt-contrib-coffee'
 	grunt.loadNpmTasks 'grunt-contrib-uglify'

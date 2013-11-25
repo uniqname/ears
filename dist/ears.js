@@ -1,5 +1,40 @@
+/*! 
+ @name          ears
+ @description   An object event manager
+ @version       0.1.0 - 2013/11/25
+ @author        Cory Brown
+ @copyright     Copyright 2013 by Intellectual Reserve, Inc.
+ @usage
+
+    # Create a new Ears object passing in the object to be managed
+    earsObj = new Ears(managedObject)
+
+    # Attach event handlers to events
+    earsObj.on 'eventName', (e) ->
+        //Do stuff
+
+    # ears has an alternative syntax which changes the focus from events managed by the triggering object being managed by the listening object.
+    earsObj.listenTo 'eventName', objToListenTo, (e) ->
+        //Do stuff
+
+    # Simply trigger events on objects
+    earsObj.trigger 'test'
+
+    # You can also pass data through the event object
+    earsObj.trigger 'test', evtData
+
+    # Data passed through the event object is accessed through the `data` property.
+    earsSubscriber.listenTo 'eventName', earsPublisher, (evt) ->
+        evt.data
+
+
+
+ TODO: Support for namespaced events.
+*/
+
+
 (function() {
-  var Ears, ears;
+  var Ears;
 
   if (!Array.isArray) {
     Array.isArray = function(testObj) {
@@ -79,14 +114,6 @@
     return Ears;
 
   })();
-
-  ears = new Ears();
-
-  ears.on('test', function(e) {
-    return console.log(e);
-  });
-
-  ears.trigger('test');
 
 }).call(this);
 
