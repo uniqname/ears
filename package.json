@@ -1,0 +1,17 @@
+{
+  "name": "ears",
+  "folder": "ears",
+  "title": "Ears",
+  "url": "https://github.com/uniqname/ears",
+  "author": "Cory Brown",
+  "copyright": "2013",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-include-replace": "~0.2.0",
+    "grunt-contrib-coffee": "~0.7.0"
+  }
+}
