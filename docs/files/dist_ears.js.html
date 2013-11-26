@@ -1,3 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>dist/ears.js - ears</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="ears"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Ears.html">Ears</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: dist/ears.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
 /*! 
  @name          ears
  @description   An object event manager
@@ -10,21 +98,21 @@
     earsObj = new Ears(managedObject)
 
     # Attach event handlers to events
-    earsObj.on 'eventName', (e) ->
+    earsObj.on &#x27;eventName&#x27;, (e) -&gt;
         //Do stuff
 
     # ears has an alternative syntax which changes the focus from events managed by the triggering object being managed by the listening object.
-    earsObj.listenTo 'eventName', objToListenTo, (e) ->
+    earsObj.listenTo &#x27;eventName&#x27;, objToListenTo, (e) -&gt;
         //Do stuff
 
     # Simply trigger events on objects
-    earsObj.trigger 'test'
+    earsObj.trigger &#x27;test&#x27;
 
     # You can also pass data through the event object
-    earsObj.trigger 'test', evtData
+    earsObj.trigger &#x27;test&#x27;, evtData
 
-    # Data passed through the event object is accessed through the `data` property.
-    earsSubscriber.listenTo 'eventName', earsPublisher, (evt) ->
+    # Data passed through the event object is accessed through the &#x60;data&#x60; property.
+    earsSubscriber.listenTo &#x27;eventName&#x27;, earsPublisher, (evt) -&gt;
         evt.data
 
 
@@ -38,14 +126,14 @@
 
   if (!Array.isArray) {
     Array.isArray = function(testObj) {
-      return Object.prototype.toString.call(testObj) === '[object Array]';
+      return Object.prototype.toString.call(testObj) === &#x27;[object Array]&#x27;;
     };
   }
 
   if (!Array.prototype.indexOf) {
     Array.prototype.indexOf = function(item) {
       var el, i, _i, _len;
-      for (i = _i = 0, _len = this.length; _i < _len; i = ++_i) {
+      for (i = _i = 0, _len = this.length; _i &lt; _len; i = ++_i) {
         el = this[i];
         if (item === el) {
           return i;
@@ -90,8 +178,8 @@
 
       this.on = function(evts, handler) {
         var evt, _i, _len, _ref;
-        _ref = evts.split(' ');
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        _ref = evts.split(&#x27; &#x27;);
+        for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
           evt = _ref[_i];
           if (!Array.isArray(callbacks[evt])) {
             callbacks[evt] = [];
@@ -111,8 +199,8 @@
 
       this.off = function(evts, handler) {
         var evt, _i, _len, _ref;
-        _ref = evts.split(' ');
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        _ref = evts.split(&#x27; &#x27;);
+        for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
           evt = _ref[_i];
           callbacks[evt].splice(callbacks.indexOf(handler), 1);
         }
@@ -127,7 +215,7 @@
       */
 
       this.get = function(property) {
-        this.trigger('observation', {
+        this.trigger(&#x27;observation&#x27;, {
           property: property
         });
         return obj[property];
@@ -145,7 +233,7 @@
         var previous;
         previous = obj[property];
         obj[property] = value;
-        this.trigger('mutation', {
+        this.trigger(&#x27;mutation&#x27;, {
           property: property,
           previousValue: previous,
           newValue: value
@@ -164,19 +252,19 @@
         var previous;
         previous = obj[property];
         delete (obj[property] != null);
-        this.trigger('propertyRemoved', {
+        this.trigger(&#x27;propertyRemoved&#x27;, {
           property: property,
           previousValue: previous,
           newValue: obj[property]
         });
-        this.on('propertyRemoved', function(evt) {
-          return this.trigger('mutation', evt.data);
+        this.on(&#x27;propertyRemoved&#x27;, function(evt) {
+          return this.trigger(&#x27;mutation&#x27;, evt.data);
         });
         return this;
       };
       /**
       * Attaches an event handler to one or more events on another object.
-      * This is essentailly the same as `on` only from the perspective of the
+      * This is essentailly the same as &#x60;on&#x60; only from the perspective of the
       * subscriber to the event, rather than the publisher.
       *
       * @method listenTo
@@ -192,7 +280,7 @@
       };
       /**
       * Removes an event handler from one or more events on another object.
-      * This is essentailly the same as `off` only from the perspective of the
+      * This is essentailly the same as &#x60;off&#x60; only from the perspective of the
       * subscriber to the event, rather than the publisher.
       *
       * @method ignore
@@ -217,17 +305,17 @@
 
       this.trigger = function(evts, data) {
         var evt, evtObj, handler, _i, _j, _len, _len1, _ref, _ref1;
-        _ref = evts.split(' ');
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        _ref = evts.split(&#x27; &#x27;);
+        for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {
           evt = _ref[_i];
           evtObj = {
             type: evt,
             data: data
           };
           _ref1 = callbacks[evt];
-          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          for (_j = 0, _len1 = _ref1.length; _j &lt; _len1; _j++) {
             handler = _ref1[_j];
-            if (typeof handler === "function") {
+            if (typeof handler === &quot;function&quot;) {
               handler(evtObj);
             }
           }
@@ -247,3 +335,22 @@
 /*
 //@ sourceMappingURL=ears.js.map
 */
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

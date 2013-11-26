@@ -18,7 +18,7 @@ module.exports = (grunt) ->
 
                         return "#{dest}#{filename}.js"
                 }]
-                
+
         # https:#github.com/gruntjs/grunt-contrib-uglify
         uglify:
             options:
@@ -51,8 +51,20 @@ module.exports = (grunt) ->
                 # Destinaion directory to copy files to
                 dest: 'dist/'
 
-    grunt.loadNpmTasks 'grunt-contrib-coffee'
-	grunt.loadNpmTasks 'grunt-contrib-uglify'
-	grunt.loadNpmTasks 'grunt-include-replace'
+        yuidoc:
+            compile:
+                name: '<%= pkg.name %>'
+                description: '<%= pkg.description %>'
+                version: '<%= pkg.version %>'
+                url: '<%= pkg.homepage %>'
+                options:
+                    paths: 'dist/'
+                    outdir: 'docs/'
 
-	grunt.registerTask 'default',['coffee:compile','uglify:dist', 'includereplace']
+
+    grunt.loadNpmTasks 'grunt-contrib-coffee'
+    grunt.loadNpmTasks 'grunt-contrib-uglify'
+    grunt.loadNpmTasks 'grunt-include-replace'
+    grunt.loadNpmTasks 'grunt-contrib-yuidoc'
+
+    grunt.registerTask 'default',['coffee:compile','uglify:dist', 'includereplace', 'yuidoc:compile']

@@ -1,0 +1,242 @@
+{
+    "project": {
+        "name": "ears",
+        "description": "",
+        "version": "0.1.0",
+        "url": ""
+    },
+    "files": {
+        "dist/ears.js": {
+            "name": "dist/ears.js",
+            "modules": {},
+            "classes": {
+                "Ears": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Ears": {
+            "name": "Ears",
+            "shortname": "Ears",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "dist/ears.js",
+            "line": 57,
+            "description": "The Ears class. Where Awesome happens",
+            "is_constructor": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "dist/ears.js",
+            "line": 72,
+            "description": "Returns the unwrapped raw object (ie The stuff between the ears ;) )",
+            "itemtype": "method",
+            "name": "raw",
+            "return": {
+                "description": "Returns the original (perhaps mutated) raw object absent any ears funtionality",
+                "type": "Object"
+            },
+            "class": "Ears"
+        },
+        {
+            "file": "dist/ears.js",
+            "line": 82,
+            "description": "Attaches an event handler to one or more events on the object",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "evts",
+                    "description": "A string consisting of a space speerated list of one or more event names to listen for",
+                    "type": "String"
+                },
+                {
+                    "name": "handler",
+                    "description": "The function to be executed upon the occasion of the specfied event(s)",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "Returns the Ears object",
+                "type": "Ears"
+            },
+            "class": "Ears"
+        },
+        {
+            "file": "dist/ears.js",
+            "line": 103,
+            "description": "Attaches an event handler to one or more events",
+            "itemtype": "method",
+            "name": "off",
+            "params": [
+                {
+                    "name": "evts",
+                    "description": "A string consisting of a space speerated list of one or more event names to cease listening for",
+                    "type": "String"
+                },
+                {
+                    "name": "handler",
+                    "description": "The function originally attached as the handler to the specified event(s)",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "Returns the Ears object",
+                "type": "Ears"
+            },
+            "class": "Ears"
+        },
+        {
+            "file": "dist/ears.js",
+            "line": 121,
+            "description": "Gets the value of a property on the managed object",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "property",
+                    "description": "The name of the property to retrieve the value of.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The value of the property on the object, or undefined if it does not exist",
+                "type": "Mixed"
+            },
+            "class": "Ears"
+        },
+        {
+            "file": "dist/ears.js",
+            "line": 135,
+            "description": "Sets the value of a property on the managed object",
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "property",
+                    "description": "The name of the property to set the value of.",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "The value of the property being set",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns the Ears object",
+                "type": "Ears"
+            },
+            "class": "Ears"
+        },
+        {
+            "file": "dist/ears.js",
+            "line": 155,
+            "description": "Removes a property from the managed object",
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "property",
+                    "description": "The name of the property to be removed.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns the Ears object",
+                "type": "Ears"
+            },
+            "class": "Ears"
+        },
+        {
+            "file": "dist/ears.js",
+            "line": 177,
+            "description": "Attaches an event handler to one or more events on another object.\nThis is essentailly the same as `on` only from the perspective of the\nsubscriber to the event, rather than the publisher.",
+            "itemtype": "method",
+            "name": "listenTo",
+            "params": [
+                {
+                    "name": "evts",
+                    "description": "A string consisting of a space speerated list of one or more event names to listen for",
+                    "type": "String"
+                },
+                {
+                    "name": "ears",
+                    "description": "The object being lisented to (The event publisher)",
+                    "type": "Ears"
+                },
+                {
+                    "name": "handler",
+                    "description": "The function to be executed upon the occasion of the specfied event(s)",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "Returns the Ears object",
+                "type": "Ears"
+            },
+            "class": "Ears"
+        },
+        {
+            "file": "dist/ears.js",
+            "line": 193,
+            "description": "Removes an event handler from one or more events on another object.\nThis is essentailly the same as `off` only from the perspective of the\nsubscriber to the event, rather than the publisher.",
+            "itemtype": "method",
+            "name": "ignore",
+            "params": [
+                {
+                    "name": "evts",
+                    "description": "A string consisting of a space speerated list of one or more event names to cease listening to",
+                    "type": "String"
+                },
+                {
+                    "name": "ears",
+                    "description": "The object whos event is no longer to be lisented to (The event publisher)",
+                    "type": "Ears"
+                },
+                {
+                    "name": "handler",
+                    "description": "The function that was originally bound to the event.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "Returns the Ears object",
+                "type": "Ears"
+            },
+            "class": "Ears"
+        },
+        {
+            "file": "dist/ears.js",
+            "line": 209,
+            "description": "Publish (emit, dispatch) an event.",
+            "itemtype": "method",
+            "name": "trigger",
+            "params": [
+                {
+                    "name": "evts",
+                    "description": "A string consisting of a space speerated list of one or more event names to dispatch",
+                    "type": "String"
+                },
+                {
+                    "name": "Data",
+                    "description": "to be included in the dispached event object.",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "Returns the Ears object",
+                "type": "Ears"
+            },
+            "class": "Ears"
+        }
+    ],
+    "warnings": []
+}
