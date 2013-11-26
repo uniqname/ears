@@ -56,64 +56,100 @@
 
   Ears = (function() {
     function Ears(obj) {
-      this.obj = obj != null ? obj : {};
-      this.__callbacks = {};
-    }
-
-    Ears.prototype.on = function(evts, handler) {
-      var evt, _i, _len, _ref;
-      _ref = evts.split(' ');
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        evt = _ref[_i];
-        if (!Array.isArray(this.__callbacks[evt])) {
-          this.__callbacks[evt] = [];
+      var callbacks;
+      if (obj == null) {
+        obj = {};
+      }
+      callbacks = {};
+      this.raw = function() {
+        return obj;
+      };
+      this.on = function(evts, handler) {
+        var evt, _i, _len, _ref;
+        _ref = evts.split(' ');
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          evt = _ref[_i];
+          if (!Array.isArray(callbacks[evt])) {
+            callbacks[evt] = [];
+          }
+          callbacks[evt].push(handler);
         }
-        this.__callbacks[evt].push(handler);
-      }
-      return this;
-    };
-
-    Ears.prototype.off = function(evts, handler) {
-      var evt, _i, _len, _ref;
-      _ref = evts.split(' ');
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        evt = _ref[_i];
-        this.__callbacks[evt].splice(this.__callbacks.indexOf(handler), 1);
-      }
-      return this;
-    };
-
-    Ears.prototype.listenTo = function(evts, ears, handler) {
-      return ears.on(evts, handler);
-    };
-
-    Ears.prototype.ignore = function(evts, ears, handler) {
-      return ears.off(evts, handler);
-    };
-
-    Ears.prototype.trigger = function(evts, data) {
-      var evt, evtObj, handler, _i, _j, _len, _len1, _ref, _ref1;
-      _ref = evts.split(' ');
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        evt = _ref[_i];
-        evtObj = {
-          type: evt,
-          data: data
-        };
-        _ref1 = this.__callbacks[evt];
-        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-          handler = _ref1[_j];
-          if (typeof handler === "function") {
-            handler(evtObj);
+        return this;
+      };
+      this.off = function(evts, handler) {
+        var evt, _i, _len, _ref;
+        _ref = evts.split(' ');
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          evt = _ref[_i];
+          callbacks[evt].splice(callbacks.indexOf(handler), 1);
+        }
+        return this;
+      };
+      this.get = function(property) {
+        this.trigger('observation', {
+          property: property
+        });
+        return obj[property];
+      };
+      this.set = function(property, value) {
+        var previous;
+        previous = obj[property];
+        obj[property] = value;
+        this.trigger('mutation', {
+          property: property,
+          previousValue: previous,
+          newValue: value
+        });
+        return this;
+      };
+      this.remove = function(property) {
+        var previous;
+        previous = obj[property];
+        delete (obj[property] != null);
+        this.trigger('propertyRemoved', {
+          property: property,
+          previousValue: previous,
+          newValue: obj[property]
+        });
+        this.on('propertyRemoved', function(evt) {
+          return this.trigger('mutation', evt.data);
+        });
+        return this;
+      };
+      this.listenTo = function(evts, ears, handler) {
+        ears.on(evts, handler);
+        return this;
+      };
+      this.ignore = function(evts, ears, handler) {
+        ears.off(evts, handler);
+        return this;
+      };
+      this.trigger = function(evts, data) {
+        var evt, evtObj, handler, _i, _j, _len, _len1, _ref, _ref1;
+        _ref = evts.split(' ');
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          evt = _ref[_i];
+          evtObj = {
+            type: evt,
+            data: data
+          };
+          _ref1 = callbacks[evt];
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            handler = _ref1[_j];
+            if (typeof handler === "function") {
+              handler(evtObj);
+            }
           }
         }
-      }
-      return this;
-    };
+        return this;
+      };
+    }
 
     return Ears;
 
   })();
+
+  window.Ears = Ears;
 
 }).call(this);
 

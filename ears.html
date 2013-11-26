@@ -7,7 +7,31 @@
 			<link rel="stylesheet" href="">
 	</head>
 	<body>
-		<h1>This is a test.</h1>
-		<script src="ears.js"></script>
+		<h1>ears.js</h1>
+		<h2>Object Event Manager</h2>
+		<pre><code class="jsObject">
+	{
+		"name": "ears.js",
+		"description": "An object event manager",
+		"class": "Human"
+	}
+		</code></pre>
+		<button class="action">Mutate Object (This is NOT a DOM event)</button>
+		<script src="dist/ears.min.js"></script>
+		<script>
+			var codeContainer = document.querySelector('.jsObject'),
+				obj = JSON.parse(codeContainer.innerText),
+				ear = new Ears(obj);
+
+			ear.on('mutation', function (e) {
+				alert('The mutants are comming!');
+			});
+
+			document.querySelector('.action').addEventListener('click', function (e) {
+				var obj = JSON.stringify(ear.set('class', 'Mutant').raw());
+				codeContainer.innerHTML = obj;
+
+			});
+		</script>
 	</body>
 </html>

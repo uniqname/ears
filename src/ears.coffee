@@ -45,31 +45,73 @@ if not Array.prototype.indexOf
 
 
 class Ears
-    constructor: (@obj = {}) ->
-        @__callbacks = {}
+    constructor: (obj = {}) ->
+        callbacks = {}
 
-    on: (evts, handler) ->
-        for evt in evts.split(' ')
-            @__callbacks[evt] = [] if not Array.isArray @__callbacks[evt]
-            @__callbacks[evt].push handler
-        return @
+        # Here be dragons!
+        @raw = () ->
+            return obj
 
-    off: (evts, handler) ->
-        for evt in evts.split(' ')
-            @__callbacks[evt].splice @__callbacks.indexOf(handler), 1
-        return @
+        @on = (evts, handler) ->
+            for evt in evts.split(' ')
+                callbacks[evt] = [] if not Array.isArray callbacks[evt]
+                callbacks[evt].push handler
+            return @
 
-    listenTo: (evts, ears, handler) -> 
-        ears.on evts, handler
+        @off = (evts, handler) ->
+            for evt in evts.split(' ')
+                callbacks[evt].splice callbacks.indexOf(handler), 1
+            return @
 
-    ignore: (evts, ears, handler) ->
-        ears.off evts, handler
+        @get = (property) ->
+            @trigger 'observation', 
+                property: property
+            
+            return obj[property]
 
-    trigger: (evts, data) ->
-        for evt in evts.split(' ')
-            evtObj = 
-                type: evt
-                data: data
+        @set = (property, value) ->
+            previous = obj[property]
+            obj[property] = value;
+            @trigger 'mutation', 
+                property: property
+                previousValue: previous
+                newValue: value 
+            
+            return @
 
-            handler?(evtObj) for handler in @__callbacks[evt]
-        return @
+        @remove = (property) ->
+            previous = obj[property]
+
+            delete obj[property]?
+
+            @trigger 'propertyRemoved', 
+                property: property
+                previousValue: previous
+                newValue: obj[property]
+
+            @on 'propertyRemoved', (evt) ->
+                @trigger 'mutation', evt.data
+
+            return @
+
+
+        @listenTo = (evts, ears, handler) -> 
+            ears.on evts, handler
+            return @
+
+        @ignore = (evts, ears, handler) ->
+            ears.off evts, handler
+            return @
+    
+
+        @trigger = (evts, data) ->
+            for evt in evts.split(' ')
+                evtObj = 
+                    type: evt
+                    data: data
+
+                handler?(evtObj) for handler in callbacks[evt]
+
+            return @
+
+window.Ears = Ears
