@@ -197,6 +197,10 @@ class Ears
 
                 handler?(evtObj) for handler in callbacks[evt]
 
+                # Objects can subscribe to all events from another object.
+                # It is left to the subscriber to filter and handle appropriately
+                handler?(evtObj) for handler in callbacks['*']
+
             return @
 
 window.Ears = Ears

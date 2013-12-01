@@ -1,7 +1,7 @@
 /*! 
  @name          ears
  @description   An object event manager
- @version       0.1.0 - 2013/11/25
+ @version       0.1.0 - 2013/11/30
  @author        Cory Brown
  @copyright     Copyright 2013 by Intellectual Reserve, Inc.
  @usage
@@ -216,7 +216,7 @@
       */
 
       this.trigger = function(evts, data) {
-        var evt, evtObj, handler, _i, _j, _len, _len1, _ref, _ref1;
+        var evt, evtObj, handler, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
         _ref = evts.split(' ');
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           evt = _ref[_i];
@@ -227,6 +227,13 @@
           _ref1 = callbacks[evt];
           for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
             handler = _ref1[_j];
+            if (typeof handler === "function") {
+              handler(evtObj);
+            }
+          }
+          _ref2 = callbacks['*'];
+          for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+            handler = _ref2[_k];
             if (typeof handler === "function") {
               handler(evtObj);
             }
