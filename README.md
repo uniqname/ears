@@ -18,7 +18,7 @@ ears has an alternative syntax which changes the focus from events managed by th
     earsObj.listenTo 'eventName', objToListenTo, (e) ->
         # Do stuff
         
-You can even subscribe to all published events from an object with the "*" event name. Using "*" as the event name will mean that the attached handler will be called on every published event an object triggers. It is up to the subscribing objects event handler to filter and responed to those events.
+You can even subscribe to all published events from an object with the "\*" event name. Using "\*" as the event name will mean that the attached handler will be called on every published event an object triggers. It is up to the subscribing objects event handler to filter and responed to those events.
 
     earsObj.listenTo '*', objToListenTo, (e) ->
         case e.type
