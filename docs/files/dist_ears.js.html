@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -89,7 +89,7 @@
 /*! 
  @name          ears
  @description   An object event manager
- @version       0.1.0 - 2013/11/30
+ @version       0.2.0 - 2013/12/01
  @author        Cory Brown
  @copyright     Copyright 2013 by Intellectual Reserve, Inc.
  @usage
@@ -319,7 +319,7 @@
               handler(evtObj);
             }
           }
-          _ref2 = callbacks[&#x27;*&#x27;];
+          _ref2 = callbacks[&#x27;*&#x27;] != null;
           for (_k = 0, _len2 = _ref2.length; _k &lt; _len2; _k++) {
             handler = _ref2[_k];
             if (typeof handler === &quot;function&quot;) {

@@ -1,7 +1,7 @@
 /*! 
  @name          ears
  @description   An object event manager
- @version       0.1.0 - 2013/11/30
+ @version       0.2.0 - 2013/12/01
  @author        Cory Brown
  @copyright     Copyright 2013 by Intellectual Reserve, Inc.
  @usage
@@ -231,7 +231,7 @@
               handler(evtObj);
             }
           }
-          _ref2 = callbacks['*'];
+          _ref2 = callbacks['*'] != null;
           for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
             handler = _ref2[_k];
             if (typeof handler === "function") {

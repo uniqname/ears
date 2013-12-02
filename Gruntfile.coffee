@@ -40,17 +40,29 @@ module.exports = (grunt) ->
                     globals:
                         version: '<%= pkg.version %>'
                         date: '<%= grunt.template.today("yyyy/mm/dd") %>'
+                        earsjs: '<%= pkg.name %>.min.js'
                     
                     # Optional variable prefix & suffix, defaults as shown
                     prefix: '@@'
                     suffix: ''
 
                 # Files to perform replacements and includes with
-                src: ['dist/<%= pkg.name %>.js', 'dist/<%= pkg.name %>.min.js']
+                src: ['dist/<%= pkg.name %>.js', 'dist/<%= pkg.name %>.min.js', '*.html']
 
                 # Destinaion directory to copy files to
                 dest: 'dist/'
 
+            dev: 
+                options:
+
+                    # Global variables available in all files
+                    globals:
+                        version: '<%= pkg.version %>'
+                        date: '<%= grunt.template.today("yyyy/mm/dd") %>'
+                        earsjs: '<%= pkg.name %>.js'
+
+                # Files to perform replacements and includes with
+                src: ['dist/<%= pkg.name %>.js', 'dist/<%= pkg.name %>.min.js', '*.html']
         yuidoc:
             compile:
                 name: '<%= pkg.name %>'
@@ -67,4 +79,5 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-include-replace'
     grunt.loadNpmTasks 'grunt-contrib-yuidoc'
 
-    grunt.registerTask 'default',['coffee:compile','uglify:dist', 'includereplace', 'yuidoc:compile']
+    grunt.registerTask 'dev',['coffee:compile','uglify:dist', 'includereplace:dev', 'yuidoc:compile']
+    grunt.registerTask 'default',['coffee:compile','uglify:dist', 'includereplace:dist', 'yuidoc:compile']
