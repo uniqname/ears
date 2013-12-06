@@ -1,16 +1,43 @@
 module.exports = (grunt) ->
-	grunt.initConfig
-		pkg: grunt.file.readJSON 'package.json'
-		
-		coffee:
+    # load all grunt tasks and not need to declare them at the end
+    require('matchdep').filterDev('grunt-*').forEach grunt.loadNpmTasks
+
+    grunt.initConfig
+        pkg: grunt.file.readJSON 'package.json'
+        
+        # basic watch tasks first for development
+        watch:
+            coffee:
+                files: [
+                    'src/*.coffee'
+                ]
+                tasks: 'coffee:compile'
+                options:
+                    livereload: true
+
+        # lint our files to make sure we're keeping to team standards
+        coffeelint:
+            files:
+                src: ['src/<%= pkg.name %>.coffee']
+            options:
+                'indentation':
+                    value: 4
+                    level: 'warn'
+                'no_trailing_whitespace':
+                    level: 'ignore'
+                'max_line_length':
+                    velue: 120
+                    level: 'warn'
+
+        coffee:
             compile:
                 options:
-                  sourceMap: true
+                    sourceMap: true
 
                 files: [{
                     expand: true
                     cwd: 'src/'
-                    src: ['**.coffee']
+                    src: ['<%= pkg.name %>.coffee']
                     dest: 'dist/'
                     rename: (dest, src) ->
                         filename = "#{src.substring src.lastIndexOf('/'), src.length}"
@@ -32,6 +59,9 @@ module.exports = (grunt) ->
                 src:['dist/<%= pkg.name %>.js']
                 dest:'dist/<%= pkg.name %>.min.js'
 
+        # clear out any unneccessary files
+        clean: ['dist/*']
+
         # https:#npmjs.org/package/grunt-include-replace
         includereplace:
             dist:
@@ -47,14 +77,13 @@ module.exports = (grunt) ->
                     suffix: ''
 
                 # Files to perform replacements and includes with
-                src: ['dist/<%= pkg.name %>.js', 'dist/<%= pkg.name %>.min.js', '*.html']
+                src: ['dist/<%= pkg.name %>.js', 'dist/<%= pkg.name %>.min.js', 'src/<%= pkg.name %>.html']
 
                 # Destinaion directory to copy files to
                 dest: 'dist/'
 
             dev: 
                 options:
-
                     # Global variables available in all files
                     globals:
                         version: '<%= pkg.version %>'
@@ -62,7 +91,11 @@ module.exports = (grunt) ->
                         earsjs: '<%= pkg.name %>.js'
 
                 # Files to perform replacements and includes with
-                src: ['dist/<%= pkg.name %>.js', 'dist/<%= pkg.name %>.min.js', '*.html']
+                src: ['dist/<%= pkg.name %>.js', 'dist/<%= pkg.name %>.min.js', 'src/<%= pkg.name %>.html']
+
+                # Destinaion directory to copy files to
+                dest: 'dist/'                
+
         yuidoc:
             compile:
                 name: '<%= pkg.name %>'
@@ -73,11 +106,5 @@ module.exports = (grunt) ->
                     paths: 'dist/'
                     outdir: 'docs/'
 
-
-    grunt.loadNpmTasks 'grunt-contrib-coffee'
-    grunt.loadNpmTasks 'grunt-contrib-uglify'
-    grunt.loadNpmTasks 'grunt-include-replace'
-    grunt.loadNpmTasks 'grunt-contrib-yuidoc'
-
-    grunt.registerTask 'dev',['coffee:compile','uglify:dist', 'includereplace:dev', 'yuidoc:compile']
-    grunt.registerTask 'default',['coffee:compile','uglify:dist', 'includereplace:dist', 'yuidoc:compile']
+    grunt.registerTask 'dev',['clean', 'coffeelint', 'coffee:compile', 'includereplace:dev']
+    grunt.registerTask 'default',['clean', 'coffee:compile', 'uglify:dist', 'includereplace:dist', 'yuidoc:compile']

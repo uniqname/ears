@@ -1,7 +1,7 @@
 /*! 
  @name          ears
  @description   An object event manager
- @version       0.2.0 - 2013/12/01
+ @version       0.2.0 - 2013/12/06
  @author        Cory Brown
  @copyright     Copyright 2013 by Intellectual Reserve, Inc.
  @usage
