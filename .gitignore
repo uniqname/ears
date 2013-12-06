@@ -1,1 +1,4 @@
 node_modules/
+
+# No reason to commit build files
+dist/

@@ -117,7 +117,7 @@ class Ears
         ###
         @set = (property, value) ->
             previous = obj[property]
-            obj[property] = value;
+            obj[property] = value
             @trigger 'mutation', 
                 property: property
                 previousValue: previous
