@@ -2,17 +2,31 @@
   "name": "ears",
   "folder": "ears",
   "title": "Ears",
-  "url": "https://github.com/uniqname/ears",
+  "repository": "https://github.com/uniqname/ears",
   "author": "Cory Brown",
   "copyright": "2013",
-  "version": "0.2.0",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "gulp",
+    "demo": "http-server ./"
+  },
   "devDependencies": {
+    "babel": "^5.8.23",
+    "babelify": "^6.3.0",
+    "browserify": "^11.2.0",
     "grunt": "~0.4.1",
-    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-connect": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-yuidoc": "~0.5.0",
     "grunt-include-replace": "~0.2.0",
-    "grunt-contrib-coffee": "~0.7.0",
-    "grunt-contrib-yuidoc": "~0.5.0"
+    "gulp": "^3.9.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^1.4.1",
+    "gulp-util": "^3.0.6",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
